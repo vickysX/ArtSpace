@@ -1,6 +1,28 @@
 <resources>
     <string name="app_name">Art Space</string>
 
-    <string name="previous_button">Previous</string>
-    <string name="next_button">Next</string>
+    <string name="previous_button">PREVIOUS</string>
+    <string name="next_button">NEXT</string>
+
+    <string name="botticelli">Sandro Botticelli</string>
+    <string name="van_gogh">Vincent Van Gogh</string>
+    <string name="leonardo">Leonardo da Vinci</string>
+    <string name="munch">Edvard Munch</string>
+    <string name="dali">Salvador Dalì</string>
+
+    <string name="spring_birth">La Nascita di Venere</string>
+    <string name="spring_birth_description">Sandro Botticelli - La nascita di Venere</string>
+    <string name="spring_birth_year">1486</string>
+
+    <string name="scream_title">Skrik</string>
+    <string name="scream_description">Edvard Munch - Skrik</string>
+    <string name="scream_year">1893</string>
+
+    <string name="starry_night_title">De sterrennacht</string>
+    <string name="starry_night_description">Vincent Van Gogh - De sterrennacht</string>
+    <string name="starry_night_year">1889</string>
+
+    <string name="ecumenical_council_title">The Ecumenical Council</string>
+    <string name="ecumenical_council_description">Salvador Dalì - The Ecumenical Council</string>
+    <string name="ecumenical_council_year">1960</string>
 </resources>
