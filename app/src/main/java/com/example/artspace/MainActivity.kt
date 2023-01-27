@@ -50,43 +50,70 @@ fun ArtSpaceScreen() {
     }
     val normalPrevious = {itemIndex -= 1}
     val normalNext = {itemIndex += 1}
-    when (itemIndex) {
-        0 -> ArtSpaceLayout(
-            artItem = items[0],
-            onPrevious = {itemIndex = 10},
-            onNext = normalNext
-        )
-        1 -> ArtSpaceLayout(
-            artItem = items[1],
-            onPrevious = normalPrevious,
-            onNext = normalNext
-        )
-        2 -> ArtSpaceLayout(
-            artItem = items[2],
-            onPrevious = normalPrevious,
-            onNext = normalNext
-        )
-        // all the other cases
-        else -> ArtSpaceLayout(
-            artItem = items[items.size - 1],
-            onPrevious = normalPrevious,
-            onNext = {itemIndex = 0}
-        )
+    Column (
+        modifier = Modifier
+            .fillMaxHeight()
+            .wrapContentHeight(Alignment.Bottom)
+            .padding(
+                start = 24.dp,
+                end = 24.dp,
+                bottom = 24.dp
+            )
+            ) {
+        when (itemIndex) {
+            0 -> {
+                ArtSpaceLayout(
+                    artItem = items[0]
+                )
+                Spacer(Modifier.height(180.dp))
+                ButtonRow(
+                    onPrevious = {itemIndex = 10},
+                    onNext = normalNext
+                )
+            }
+
+            1 -> {
+                ArtSpaceLayout(
+                    artItem = items[1]
+                )
+                Spacer(Modifier.height(180.dp))
+                ButtonRow(
+                    onPrevious = normalPrevious,
+                    onNext = normalNext
+                )
+            }
+            2 -> {
+                ArtSpaceLayout(
+                    artItem = items[2]
+                )
+                Spacer(Modifier.height(180.dp))
+                ButtonRow(
+                    onPrevious = normalPrevious,
+                    onNext = normalNext
+                )
+            }
+            // all the other cases
+            else -> {
+                ArtSpaceLayout(
+                    artItem = items[items.size - 1]
+                )
+                Spacer(Modifier.height(180.dp))
+                ButtonRow(
+                    onPrevious = normalPrevious,
+                    onNext = {itemIndex = 0}
+                )
+            }
+        }
     }
+
 }
 
 @Composable
 fun ArtSpaceLayout(
     artItem : ArtItem,
-    onPrevious : () -> Unit,
-    onNext : () -> Unit,
     //modifier: Modifier = Modifier
 ) {
     Column(
-        modifier = Modifier
-            .fillMaxHeight()
-            .wrapContentHeight(Alignment.CenterVertically)
-            .padding(start = 24.dp, end = 24.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Column(
@@ -101,7 +128,6 @@ fun ArtSpaceLayout(
                 contentDescription = stringResource(artItem.imageDescription),
                 contentScale = ContentScale.Fit,
                 alignment = Alignment.Center
-                //modifier = Modifier.padding(24.dp)
             )
         }
         Spacer(Modifier.height(48.dp))
@@ -109,7 +135,6 @@ fun ArtSpaceLayout(
             horizontalAlignment = Alignment.Start,
             modifier = Modifier
                 .background(color = Color.White)
-                //.padding(8.dp)
                 .shadow(2.dp)
                 .wrapContentWidth(Alignment.Start)
         ) {
@@ -120,8 +145,10 @@ fun ArtSpaceLayout(
                     fontSize = 28.sp,
                     textAlign = TextAlign.Left,
                     modifier = Modifier
-                        .padding(start = 8.dp, top = 8.dp)
-                    // add styling
+                        .padding(
+                            start = 8.dp,
+                            end = 12.dp,
+                            top = 8.dp)
                 )
             }
             Row {
@@ -132,39 +159,46 @@ fun ArtSpaceLayout(
                     fontSize = 24.sp,
                     textAlign = TextAlign.Left,
                     modifier = Modifier
-                        .padding(start = 8.dp, bottom = 8.dp)
-                    // add styling
+                        .padding(
+                            start = 8.dp,
+                            bottom = 8.dp
+                        )
                 )
                 Spacer(Modifier.width(1.dp))
                 Text(
                     text = "(${stringResource(artItem.year)})",
                     color = Color.DarkGray,
-                    fontSize = 24.sp
-                    // add styling
+                    fontSize = 24.sp,
+                    modifier = Modifier.padding(end = 12.dp)
                 )
             }
         }
-        Spacer(Modifier.height(96.dp))
-        // maybe this row could be apart from the rest of the layout
-        Row (
-            modifier = Modifier
-                .fillMaxWidth()
-                .wrapContentWidth(Alignment.CenterHorizontally),
-            horizontalArrangement = Arrangement.spacedBy(48.dp),
-            verticalAlignment = Alignment.Bottom
+    }
+}
+
+@Composable
+fun ButtonRow(
+    onPrevious: () -> Unit,
+    onNext: () -> Unit
+) {
+    Row (
+        modifier = Modifier
+            .fillMaxWidth()
+            .wrapContentWidth(Alignment.CenterHorizontally),
+        horizontalArrangement = Arrangement.spacedBy(48.dp),
+        verticalAlignment = Alignment.Bottom
+    ) {
+        Button(
+            onClick = onPrevious,
+            modifier = Modifier.weight(1f)
         ) {
-            Button(
-                onClick = onPrevious,
-                modifier = Modifier.weight(1f)
-            ) {
-                Text(text = stringResource(R.string.previous_button))
-            }
-            Button(
-                onClick = onNext,
-                modifier = Modifier.weight(1f)
-            ) {
-                Text(text = stringResource(R.string.next_button))
-            }
+            Text(text = stringResource(R.string.previous_button))
+        }
+        Button(
+            onClick = onNext,
+            modifier = Modifier.weight(1f)
+        ) {
+            Text(text = stringResource(R.string.next_button))
         }
     }
 }
