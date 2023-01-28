@@ -1,6 +1,6 @@
 package com.example.artspace
 
-val items : List<ArtItem> = listOf(
+val items = listOf(
     ArtItem(
         R.drawable.la_nascita_di_venere,
         R.string.spring_birth_description,

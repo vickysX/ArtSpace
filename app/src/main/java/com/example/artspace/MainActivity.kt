@@ -57,50 +57,62 @@ fun ArtSpaceScreen() {
             .padding(
                 start = 24.dp,
                 end = 24.dp,
-                bottom = 24.dp
-            )
-            ) {
+                bottom = 24.dp,
+                top = 100.dp
+            ),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
         when (itemIndex) {
             0 -> {
                 ArtSpaceLayout(
-                    artItem = items[0]
+                    artItem = items[0],
+                    modifier = Modifier.weight(1.7f)
                 )
-                Spacer(Modifier.height(180.dp))
+                Spacer(Modifier
+                    //.height(180.dp)
+                    .weight(1f))
                 ButtonRow(
                     onPrevious = {itemIndex = 10},
-                    onNext = normalNext
+                    onNext = normalNext,
+                    modifier = Modifier.weight(0.3f)
                 )
             }
 
             1 -> {
                 ArtSpaceLayout(
-                    artItem = items[1]
+                    artItem = items[1],
+                    modifier = Modifier.weight(1.7f)
                 )
-                Spacer(Modifier.height(180.dp))
+                Spacer(Modifier.weight(1f))
                 ButtonRow(
                     onPrevious = normalPrevious,
-                    onNext = normalNext
+                    onNext = normalNext,
+                    modifier = Modifier.weight(0.3f)
                 )
             }
             2 -> {
                 ArtSpaceLayout(
-                    artItem = items[2]
+                    artItem = items[2],
+                    modifier = Modifier.weight(1.7f)
                 )
-                Spacer(Modifier.height(180.dp))
+                Spacer(Modifier.weight(1f))
                 ButtonRow(
                     onPrevious = normalPrevious,
-                    onNext = normalNext
+                    onNext = normalNext,
+                    modifier = Modifier.weight(0.3f)
                 )
             }
             // all the other cases
             else -> {
                 ArtSpaceLayout(
-                    artItem = items[items.size - 1]
+                    artItem = items[items.size - 1],
+                    modifier = Modifier.weight(1.7f)
                 )
-                Spacer(Modifier.height(180.dp))
+                Spacer(Modifier.weight(1f))
                 ButtonRow(
                     onPrevious = normalPrevious,
-                    onNext = {itemIndex = 0}
+                    onNext = {itemIndex = 0},
+                    modifier = Modifier.weight(0.3f)
                 )
             }
         }
@@ -111,10 +123,11 @@ fun ArtSpaceScreen() {
 @Composable
 fun ArtSpaceLayout(
     artItem : ArtItem,
-    //modifier: Modifier = Modifier
+    modifier: Modifier = Modifier
 ) {
     Column(
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
     ) {
         Column(
             modifier = Modifier
@@ -126,7 +139,7 @@ fun ArtSpaceLayout(
             Image(
                 painter = painterResource(artItem.image),
                 contentDescription = stringResource(artItem.imageDescription),
-                contentScale = ContentScale.Fit,
+                contentScale = ContentScale.Inside,
                 alignment = Alignment.Center
             )
         }
@@ -179,7 +192,8 @@ fun ArtSpaceLayout(
 @Composable
 fun ButtonRow(
     onPrevious: () -> Unit,
-    onNext: () -> Unit
+    onNext: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     Row (
         modifier = Modifier
