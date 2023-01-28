@@ -24,6 +24,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.artspace.data.Datasource
 import com.example.artspace.ui.theme.ArtSpaceTheme
 
 class MainActivity : ComponentActivity() {
@@ -50,6 +51,7 @@ fun ArtSpaceScreen() {
     }
     val normalPrevious = {itemIndex -= 1}
     val normalNext = {itemIndex += 1}
+    val items = Datasource.loadArtItems()
     Column (
         modifier = Modifier
             .fillMaxHeight()
@@ -105,7 +107,7 @@ fun ArtSpaceScreen() {
             // all the other cases
             else -> {
                 ArtSpaceLayout(
-                    artItem = items[items.size - 1],
+                    artItem = items.last(),
                     modifier = Modifier.weight(1.7f)
                 )
                 Spacer(Modifier.weight(1f))
